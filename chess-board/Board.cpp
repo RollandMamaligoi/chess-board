@@ -49,12 +49,12 @@ void Board::setBoard()
 
 void Board::showBoard()
 {
-	for (int i = 0; i < 8; i++) {
+	for (int i = 7; i > -1; i--) {
 		for (int j = 0; j < 8; j++) {
 			if (board[i][j] == nullptr) {
 				std::cout << ". ";
 			}
-			else if (board[i][j]->getPieceColour() == "WHITE") {
+			else if (board[i][j]->getPieceColour() == "BLACK") {
 					std::cout << (char)tolower(board[i][j]->getSymbol()) << " ";
 			}
 			else
