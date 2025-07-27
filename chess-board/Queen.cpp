@@ -6,6 +6,12 @@
 //    return ;
 //}
 
+std::vector<std::pair<int, int>> Queen::getPossibleMoves(Board& board, int posX, int posY)
+{
+    std::vector<std::pair<int, int>> moves;
+    return moves;
+}
+
 std::string Queen::getPieceType()
 {
     return pieceType;

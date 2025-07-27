@@ -12,4 +12,6 @@ public:
 	void setBoard();
 
 	void showBoard();
+
+	Piece* getPieceAt(int x, int y);
 };

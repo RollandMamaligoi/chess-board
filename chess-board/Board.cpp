@@ -50,6 +50,7 @@ void Board::setBoard()
 void Board::showBoard()
 {
 	for (int i = 7; i > -1; i--) {
+		std::cout << i + 1 << "| ";
 		for (int j = 0; j < 8; j++) {
 			if (board[i][j] == nullptr) {
 				std::cout << ". ";
@@ -62,4 +63,15 @@ void Board::showBoard()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << "  ----------------\n   ";
+	char column = 'a';
+	for (int i = 0; i < 8; i++) {
+		std::cout << column++ << " ";
+	}
+	std::cout << std::endl << std::endl;
+}
+
+Piece* Board::getPieceAt(int x, int y)
+{
+	return board[y][x];;
 }

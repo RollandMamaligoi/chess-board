@@ -9,6 +9,12 @@
 //    
 //}
 
+std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, int posY)
+{
+    std::vector<std::pair<int, int>> moves;
+    return moves;
+}
+
 std::string King::getPieceType()
 {
     return pieceType;
