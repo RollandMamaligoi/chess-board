@@ -3,7 +3,7 @@ Hello and welcome to my journey of me implementing a chess game (and hopefully m
 
 I am a student at University of Transilvania from Brasov Computer Science and I just finished my first year there. I started this project because I wanted to try my knowledge of this language as well as a form of exercise through the summer vacation.
 
-On 25.07.2025 I implemented a base abstract class "Piece" as well as "Pawn", "Bishop", "Knight", "Rook", "Queen" and "King" together with an indepenmdent class "Board".
+On 25.07.2025 I implemented a base abstract class "Piece" as well as derived classes "Pawn", "Bishop", "Knight", "Rook", "Queen" and "King" together with an independent class "Board".
 I am using the standard FIDE notations for the pieces ('N' for Knight, 'B' for Bishop, 'R' for Rook, 'Q' for Queen and 'K' for King) except for the pawns.
 I used headers and forward declaration. I also implmeneted setBoard() and showBoard() functions, which allow me to set the board up for the game and show it to the user through the terminal.
 
