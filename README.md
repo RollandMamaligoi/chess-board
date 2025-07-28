@@ -5,7 +5,7 @@ I am a student at University of Transilvania from Brasov Computer Science and I 
 
 On 25.07.2025 I implemented a base abstract class "Piece" as well as derived classes "Pawn", "Bishop", "Knight", "Rook", "Queen" and "King" together with an independent class "Board".
 I am using the standard FIDE notations for the pieces ('N' for Knight, 'B' for Bishop, 'R' for Rook, 'Q' for Queen and 'K' for King) except for the pawns.
-I used headers and forward declaration. I also implmeneted setBoard() and showBoard() functions, which allow me to set the board up for the game and show it to the user through the terminal.
+I used headers and forward declaration. I also implemented setBoard() and showBoard() functions, which allow me to set the board up for the game and show it to the user through the terminal.
 
 <img width="190" height="201" alt="image" src="https://github.com/user-attachments/assets/1cac3bcc-cf58-4c17-959a-bdac86dc9d88" />
 
