@@ -19,6 +19,13 @@ The upcoming images showcase the movement possibilities for the d2 pawn.
 <img width="185" height="231" alt="image" src="https://github.com/user-attachments/assets/ba6f51a2-6080-44aa-b68c-424dd7e342a3" /> <img width="188" height="229" alt="image" src="https://github.com/user-attachments/assets/46e29d3a-dfe0-49fd-8915-c7254f7ac3df" /> <img width="190" height="235" alt="image" src="https://github.com/user-attachments/assets/e1092c3c-4313-4e60-bc63-943659c8feb6" /> <img width="181" height="232" alt="image" src="https://github.com/user-attachments/assets/d7e67e80-04e1-40d2-baa1-4cdeb4bd43c4" />
 <img width="193" height="235" alt="image" src="https://github.com/user-attachments/assets/1afc8d45-e503-4fa4-af4f-341ef7702ec6" /> <img width="180" height="226" alt="image" src="https://github.com/user-attachments/assets/93eec237-b749-4853-b1db-b89aebda4806" />
 
+As well for the black pawns (d7)
+
+<img width="179" height="233" alt="image" src="https://github.com/user-attachments/assets/1740dda6-a317-4e54-8b9b-2583d62febcc" /> <img width="193" height="233" alt="image" src="https://github.com/user-attachments/assets/8f2620ea-bab6-468b-9472-c53434eaa52c" /> <img width="181" height="233" alt="image" src="https://github.com/user-attachments/assets/e1489516-a848-42b7-8113-e46309e316ac" />
+
+
+
+
 
 On 28.07.2025 I implemented the movement logic for Bishops.
 
