@@ -10,6 +10,7 @@ public:
 	~Board();
 
 	void setBoard();
+	void specialSet(); //for debugging only
 
 	void showBoard();
 

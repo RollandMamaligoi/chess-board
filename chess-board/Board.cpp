@@ -47,6 +47,17 @@ void Board::setBoard()
 	board[7][4] = new King(7, 4, "BLACK");
 }
 
+void Board::specialSet()
+{
+	board[1][3] = new Bishop(1, 3, "WHITE");
+	
+	board[2][3] = new Pawn(2, 3, "BLACK");
+	board[4][6] = new Queen(4, 6, "BLACK");
+	board[0][4] = new King(0, 4, "WHITE");
+	board[0][2] = new Rook(0, 2, "BLACK");
+	board[2][2] = new Pawn(2, 2, "WHITE");
+}
+
 void Board::showBoard()
 {
 	for (int i = 7; i > -1; i--) {
