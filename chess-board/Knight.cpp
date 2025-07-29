@@ -6,6 +6,21 @@
 std::vector<std::pair<int, int>> Knight::getPossibleMoves(Board& board, int posX, int posY)
 {
     std::vector<std::pair<int, int>> moves;
+    std::vector<std::pair<int, int>> directions = { {1, 2}, {2 , 1} , {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2 } };
+
+    for (auto dir : directions) {
+        int x = posX + dir.first, y = posY + dir.second;
+        if(x >= 0 && x < 8 && y >= 0 && y < 8 && board.getPieceAt(x, y) == nullptr) {
+            moves.push_back({ x, y });
+            x += dir.first; y += dir.second;
+        }
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+            Piece* piece = board.getPieceAt(x, y);
+            if (piece != nullptr && piece->getPieceColour() != pieceColour) {
+                moves.push_back({ x, y });
+            }
+        }
+    }
     return moves;
 }
 

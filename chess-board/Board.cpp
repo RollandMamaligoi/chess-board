@@ -49,13 +49,16 @@ void Board::setBoard()
 
 void Board::specialSet()
 {
-	board[1][3] = new Bishop(1, 3, "WHITE");
 	
-	board[2][3] = new Pawn(2, 3, "BLACK");
-	board[4][6] = new Queen(4, 6, "BLACK");
-	board[0][4] = new King(0, 4, "WHITE");
-	board[0][2] = new Rook(0, 2, "BLACK");
-	board[2][2] = new Pawn(2, 2, "WHITE");
+	board[3][3] = new Knight(3, 3, "WHITE");
+	board[5][4] = new Queen(5, 4, "WHITE");
+	board[4][5] = new Bishop(4, 5, "BLACK");
+	board[2][5] = new Rook(2, 5, "BLACK");
+	board[4][1] = new Knight(4, 1, "BLACK");
+	board[5][2] = new Rook(2, 5, "WHITE");
+	board[2][1] = new Queen(2, 1, "WHITE");
+	board[1][2] = new Rook(1, 2, "BLACK");
+	board[1][4] = new Pawn(4, 1, "BLACK");
 }
 
 void Board::showBoard()
