@@ -30,10 +30,15 @@ As well for the black pawns (d7)
 On 28.07.2025 I implemented the movement logic for Bishops.
 
 <img width="263" height="233" alt="image" src="https://github.com/user-attachments/assets/f2b879df-ddc2-4c0e-89f0-a02841a66b41" /> <img width="219" height="236" alt="image" src="https://github.com/user-attachments/assets/13c97b6b-806b-4a3a-84b6-9b0a08139726" />
-<img width="197" height="232" alt="image" src="https://github.com/user-attachments/assets/299e300f-4f1e-4341-a0e9-c0d5518dc1c1" /> <img width="195" height="232" alt="image" src="https://github.com/user-attachments/assets/61974b0d-a8ce-44ed-9f37-551b56a38b99" />
+<img width="197" height="232" alt="image" src="https://github.com/user-attachments/assets/299e300f-4f1e-4341-a0e9-c0d5518dc1c1" /> <img width="195" height="232" alt="image" src="https://github.com/user-attachments/assets/61974b0d-a8ce-44ed-9f37-551b56a38b99" /> <img width="185" height="233" alt="image" src="https://github.com/user-attachments/assets/5c636599-2bb8-4322-806b-36dd0109723a" />
 
 
-<img width="185" height="233" alt="image" src="https://github.com/user-attachments/assets/5c636599-2bb8-4322-806b-36dd0109723a" />
+On 29.07.2025 I implemented Knight movement logic.
+
+<img width="229" height="238" alt="image" src="https://github.com/user-attachments/assets/0ca05fdc-8da9-4dcc-b6f0-cdd41158895e" /> <img width="178" height="239" alt="image" src="https://github.com/user-attachments/assets/0b1ef9ca-c431-45dc-b435-6eddceba4c3e" />
+
+
+
 
 
 
