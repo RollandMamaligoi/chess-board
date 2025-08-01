@@ -1,6 +1,7 @@
 #pragma once
 class Piece;
 #include <vector>
+#include <string>
 
 class Board {
 protected:
@@ -11,8 +12,8 @@ public:
 
 	void setBoard();
 	void specialSet(); //for debugging only
-
 	void showBoard();
-
+	bool isSquareAttacked(int posX, int posY, std::string player);
 	Piece* getPieceAt(int x, int y);
+	void movePiece();
 };

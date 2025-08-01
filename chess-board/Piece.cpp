@@ -16,3 +16,8 @@ std::pair<int, int> Piece::getPosition(int posX, int posY)
     std::pair<int, int> position = std::make_pair(posX, posY);
     return position;
 }
+
+void Piece::setShield()
+{
+    Shielded = true;
+}
