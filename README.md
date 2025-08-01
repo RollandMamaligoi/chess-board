@@ -38,10 +38,34 @@ On 29.07.2025 I implemented Knight movement logic.
 <img width="229" height="238" alt="image" src="https://github.com/user-attachments/assets/0ca05fdc-8da9-4dcc-b6f0-cdd41158895e" /> <img width="178" height="239" alt="image" src="https://github.com/user-attachments/assets/0b1ef9ca-c431-45dc-b435-6eddceba4c3e" />
 
 
+On 01.08.2025 I implemented Rook, Queen and King movement logic, as well as a function that checks if a square is attacked by an enemy piece or not. This function is crucial in checking for legal moves due to certain pin, castle and king movement.
+
+Rook:
 
 
+<img width="398" height="236" alt="image" src="https://github.com/user-attachments/assets/dec5bc6d-b1ea-48fc-bfe6-0279ccf2cdaf" />
+<img width="188" height="236" alt="image" src="https://github.com/user-attachments/assets/31d3a2fa-caac-4e9c-a613-4b1f5590c3c8" />
+
+Queen:
 
 
-For the nearby future I want to implement the movement logic for the remaining pieces.
+<img width="735" height="232" alt="image" src="https://github.com/user-attachments/assets/4da5f574-8ac2-4987-8094-0f7b0a272760" />
+
+<img width="222" height="235" alt="image" src="https://github.com/user-attachments/assets/883b13a0-db4e-438e-b3e4-436e389b8764" />
+
+
+King:
+<img width="218" height="231" alt="image" src="https://github.com/user-attachments/assets/65b56be4-a6cb-4c46-8812-784e91c6815b" />
+<img width="180" height="232" alt="image" src="https://github.com/user-attachments/assets/99002cb8-40aa-45cc-9d0f-7692e866703b" />
+
+isSquareAttacked() function :
+
+<img width="194" height="255" alt="image" src="https://github.com/user-attachments/assets/a5c0fe87-1138-4e85-beee-2fdaf5f8e36c" />
+
+The first line "0" is the result of me calling the function for the White king's position, for white.
+The second line "1" is the result of me calling it for the rook on c5, for white.
+
+
+Next I want to use this new function to determine wether a move is legal or not, by checking if the king will be in check, as well as implement more "complex" movements, such as en passant and castling.
 
 
