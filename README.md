@@ -55,8 +55,11 @@ Queen:
 
 
 King:
+
 <img width="218" height="231" alt="image" src="https://github.com/user-attachments/assets/65b56be4-a6cb-4c46-8812-784e91c6815b" />
 <img width="180" height="232" alt="image" src="https://github.com/user-attachments/assets/99002cb8-40aa-45cc-9d0f-7692e866703b" />
+
+
 
 isSquareAttacked() function :
 
@@ -66,6 +69,25 @@ The first line "0" is the result of me calling the function for the White king's
 The second line "1" is the result of me calling it for the rook on c5, for white.
 
 
-Next I want to use this new function to determine wether a move is legal or not, by checking if the king will be in check, as well as implement more "complex" movements, such as en passant and castling.
+On 08.08.2025 I combined all earlier functions into a playable 1v1 chess game. Here are some videos of certain cenarios in the game:
+
+Checkmate : 
+
+https://github.com/user-attachments/assets/13dbb043-869b-4040-8818-92d061671c87
+
+En Passant :
+
+https://github.com/user-attachments/assets/584bd1f9-e527-4c25-b807-c48a5532caac
+
+Castling :
+
+https://github.com/user-attachments/assets/bb11c676-52ad-444b-a11f-ea96ef3ef051
+
+Stalemate :
+
+https://github.com/user-attachments/assets/84b61614-8e8a-48af-9c4f-2d56c9b3208e
+
+
+The game is not yet complete, I have yet to implement a promotion system for pawns once they reach the 8th or 1st rank, depending on their colour.
 
 
