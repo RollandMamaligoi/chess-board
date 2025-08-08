@@ -1,6 +1,6 @@
 #pragma once
 #include "Piece.h"
-
+class Player;
 class Board;
 
 class Bishop : public Piece {
@@ -12,4 +12,7 @@ public:
 	std::vector<std::pair<int, int>> getPossibleMoves(Board& board, int posX, int posY);
 	std::string getPieceType();
 	char getSymbol();
+	bool isFirstMove();
+	void setFirstMove(bool moved) {};
+	Piece* copy() { return new Bishop(*this); }
 };

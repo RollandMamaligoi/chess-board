@@ -1,10 +1,6 @@
 #include "Queen.h"
 #include "Board.h"
-
-//std::vector<std::pair<int, int>> Queen::possibleMoves(const Board& board, int posX, int posY)
-//{
-//    return ;
-//}
+#include "Player.h"
 
 std::vector<std::pair<int, int>> Queen::getPossibleMoves(Board& board, int posX, int posY)
 {
@@ -24,6 +20,13 @@ std::vector<std::pair<int, int>> Queen::getPossibleMoves(Board& board, int posX,
             }
         }
     }
+    int i = 0;
+    while (i < moves.size()) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+            moves.erase(moves.begin() + i);
+        }
+        else i++;
+    }
     return moves;
 }
 
@@ -35,4 +38,9 @@ std::string Queen::getPieceType()
 char Queen::getSymbol()
 {
     return symbol;
+}
+
+bool Queen::isFirstMove()
+{
+    return false;
 }

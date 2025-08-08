@@ -1,7 +1,8 @@
 #pragma once
 #include "Piece.h"
-
+class Player;
 class Board;
+class Player;
 
 class Pawn : public Piece{
 protected:
@@ -12,6 +13,8 @@ public:
 	Pawn(int posX, int posY, std::string pieceColour) : Piece(posX, posY, pieceColour) {};
 	std::vector<std::pair<int, int>> getPossibleMoves(Board& board, int posX, int posY);
 	std::string getPieceType();
-	void showMoves();
 	char getSymbol();
+	bool isFirstMove();
+	void setFirstMove(bool moved) { firstMove = moved; };
+	Piece* copy() { return new Pawn(*this); };
 };

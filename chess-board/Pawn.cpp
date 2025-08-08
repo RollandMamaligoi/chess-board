@@ -1,5 +1,6 @@
 #include "Pawn.h"
 #include "Board.h"
+#include "Player.h"
 #include <iostream>
 std::vector<std::pair<int, int>> Pawn::getPossibleMoves(Board& board, int posX, int posY)
 {
@@ -16,11 +17,27 @@ std::vector<std::pair<int, int>> Pawn::getPossibleMoves(Board& board, int posX, 
                 moves.push_back({ posX - 1, posY + 1 });
             }
         }
-        if (posY + 1 < 8 && board.getPieceAt(posX, posY + 1) == nullptr) {
-            moves.push_back({ posX , posY + 1 });
-            if (firstMove && board.getPieceAt(posX , posY + 2) == nullptr)
+        if (posX + 1 < 8 && board.getPieceAt(posX, posY + 1) == nullptr) {
+            moves.push_back({ posX, posY + 1});
+            if (firstMove && board.getPieceAt(posX, posY + 2) == nullptr)
                 moves.push_back({ posX, posY + 2});
         }
+        if (posY == 4) {
+            std::string lastMove = board.lastMove("BLACK");
+            int x = lastMove[1] - 'a';
+            int y = lastMove[2] - '1';
+            if (posX + 1 < 8) {
+                if (x == posX + 1 && y == posY && lastMove[0] == 'P') {
+                    moves.push_back({ posX + 1, posY + 1 });
+                }
+            }
+            if (posX - 1 >= 0) {
+                if (x == posX - 1 && y == posY && lastMove[0] == 'P') {
+                    moves.push_back({ posX - 1, posY + 1 });
+                }
+            }
+        }
+
     }
     else {
         if (posX - 1 >= 0 && posY - 1 >= 0 && board.getPieceAt(posX - 1, posY - 1) != nullptr) {
@@ -34,13 +51,37 @@ std::vector<std::pair<int, int>> Pawn::getPossibleMoves(Board& board, int posX, 
             }
         }
         if (posY - 1 >= 0 && board.getPieceAt(posX, posY - 1) == nullptr) {
-            moves.push_back({ posX, posY - 1 });
-            if (firstMove && board.getPieceAt(posX, posY - 2) == nullptr) {
-                moves.push_back({ posX, posY - 2 });
+            moves.push_back({ posX, posY - 1}); 
+            if (firstMove && board.getPieceAt(posX, posY  - 2 ) == nullptr) {
+                moves.push_back({ posX, posY - 2});
+            }
+        }
+        if (posY == 3) {
+            std::string lastMove = board.lastMove("WHITE");
+            int x = lastMove[1] - 'a';
+            int y = lastMove[2] - '1';
+            if (posX + 1 < 8) {
+                if (x == posX + 1 && y == posY && lastMove[0] == 'P') {
+                    moves.push_back({ posX + 1, posY - 1 });
+                }
+            }
+            if (posX - 1 >= 0) {
+                if (x == posX - 1 && y == posY && lastMove[0] == 'P') {
+                    moves.push_back({ posX - 1, posY - 1 });
+                }
             }
         }
     }
-
+    int i = 0;
+    while (i < moves.size()) {
+        //board.showBoard();
+        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+         
+            moves.erase(moves.begin() + i);
+       
+        }
+        else i++;
+    }
 
     return moves;
 }
@@ -50,15 +91,14 @@ std::string Pawn::getPieceType()
     return pieceType;
 }
 
-void Pawn::showMoves()
-{
-    char column = 'a';
-    for (int i = 0; i < possibleMoves.size(); i++) {
-        std::cout << static_cast<char>(column + possibleMoves[i].first) << possibleMoves[i].second + 1 << " ";
-    }
-}
 
 char Pawn::getSymbol()
 {
     return symbol;
 }
+
+bool Pawn::isFirstMove()
+{
+    return firstMove;
+}
+

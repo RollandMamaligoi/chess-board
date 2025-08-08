@@ -1,6 +1,6 @@
 #include "Bishop.h"
 #include "Board.h"
-
+#include "Player.h"
 //std::vector<std::pair<int, int>> Bishop::possibleMoves(Board& board, int posX, int posY)
 //{
 //    return ;
@@ -25,7 +25,13 @@ std::vector<std::pair<int, int>> Bishop::getPossibleMoves(Board& board, int posX
             }
         }
     }
-
+    int i = 0;
+    while (i < moves.size()) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+            moves.erase(moves.begin() + i);
+        }
+        else i++;
+    }
     return moves;
 }
 
@@ -37,4 +43,9 @@ std::string Bishop::getPieceType()
 char Bishop::getSymbol()
 {
     return symbol;
+}
+
+bool Bishop::isFirstMove()
+{
+    return false;
 }

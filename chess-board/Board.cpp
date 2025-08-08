@@ -6,6 +6,7 @@
 #include "Queen.h"
 #include "Pawn.h"
 #include "King.h"
+#include "Player.h"
 #include <iostream>
 namespace {
 	static const std::vector<std::pair<int, int>> xyDir = { {0, 1}, {1, 0}, {-1, 0}, {0, -1} };
@@ -25,42 +26,58 @@ Board::~Board()
 	}
 }
 
+std::pair<int, int> Board::getKingPos(std::string colour)
+{
+	if (colour == "WHITE") {
+		return whiteKingPos;
+	}
+	else {
+		return blackKingPos;
+	}
+}
+
 void Board::setBoard()
 {
 	for (int i = 0; i < 8; i++) {
-		board[1][i] = new Pawn(1, i, "WHITE");
-		board[6][i] = new Pawn(6, i, "BLACK");
+		board[i][1] = new Pawn(i, 1, "WHITE");
+		board[i][6] = new Pawn(i, 6, "BLACK");
 	}
 	board[0][0] = new Rook(0, 0, "WHITE");
-	board[0][7] = new Rook(0, 7, "WHITE");
-	board[7][0] = new Rook(7, 0, "BLACK");
+	board[7][0] = new Rook(7, 0, "WHITE");
+	board[0][7] = new Rook(0, 7, "BLACK");
 	board[7][7] = new Rook(7, 7, "BLACK");
 
-	board[0][1] = new Knight(0, 1, "WHITE");
-	board[0][6] = new Knight(0, 6, "WHITE");
-	board[7][1] = new Knight(7, 1, "BLACK");
-	board[7][6] = new Knight(7, 6, "BLACK");
+	board[1][0] = new Knight(1, 0, "WHITE");
+	board[6][0] = new Knight(6, 0, "WHITE");
+	board[1][7] = new Knight(1, 7, "BLACK");
+	board[6][7] = new Knight(6, 7, "BLACK");
 	
-	board[0][2] = new Bishop(0, 2, "WHITE");
-	board[0][5] = new Bishop(0, 5, "WHITE");
-	board[7][2] = new Bishop(7, 2, "BLACK");
-	board[7][5] = new Bishop(7, 5, "BLACK");
+	board[2][0] = new Bishop(2, 0, "WHITE");
+	board[5][0] = new Bishop(5, 0, "WHITE");
+	board[2][7] = new Bishop(2, 7, "BLACK");
+	board[5][7] = new Bishop(5, 7, "BLACK");
 
-	board[0][3] = new Queen(0, 3, "WHITE");
-	board[7][3] = new Queen(7, 3, "BLACK");
+	board[3][0] = new Queen(3, 0, "WHITE");
+	board[3][7] = new Queen(3, 7, "BLACK");
 
-	board[0][4] = new King(0, 4, "WHITE");
-	board[7][4] = new King(7, 4, "BLACK");
+	board[4][0] = new King(4, 0, "WHITE");
+	board[4][7] = new King(4, 7, "BLACK");
+	whiteKingPos = { 4 , 0 };
+	blackKingPos = { 4 , 7 };
 }
 
 void Board::specialSet()
 {
 	
-	board[3][3] = new King(3, 3, "WHITE");
-	board[4][4] = new Knight(4, 4, "WHITE");
-	board[0][2] = new Queen(2, 2, "BLACK");
-	board[1][5] = new Bishop(1, 5, "WHITE");
-	board[4][2] = new Rook(4, 2, "BLACK");
+	board[7][7] = new King(7, 7, "BLACK");
+	board[0][0] = new King(0, 0, "WHITE");
+	board[6][2] = new Queen(6, 2, "WHITE");
+	blackKingPos = { 7, 7 };
+	whiteKingPos = { 0, 0 };
+	Piece* wKing = getPieceAt(0, 0);
+	wKing->setFirstMove(false);
+	Piece* bKing = getPieceAt(7, 7);
+	bKing->setFirstMove(false);
 }
 
 
@@ -68,17 +85,17 @@ void Board::specialSet()
 
 void Board::showBoard()
 {
-	for (int i = 7; i > -1; i--) {
-		std::cout << i + 1 << "| ";
-		for (int j = 0; j < 8; j++) {
-			if (board[i][j] == nullptr) {
+	for (int y = 7; y >= 0 ; y--) {
+		std::cout << y + 1 << "| ";
+		for (int x = 0; x < 8; x++) {
+			if (board[x][y] == nullptr) {
 				std::cout << ". ";
 			}
-			else if (board[i][j]->getPieceColour() == "BLACK") {
-					std::cout << (char)tolower(board[i][j]->getSymbol()) << " ";
+			else if (board[x][y]->getPieceColour() == "BLACK") {
+					std::cout << (char)tolower(board[x][y]->getSymbol()) << " ";
 			}
 			else
-				std::cout << board[i][j]->getSymbol() << " ";
+				std::cout << board[x][y]->getSymbol() << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -90,7 +107,7 @@ void Board::showBoard()
 	std::cout << std::endl << std::endl;
 }
 
-bool Board::isSquareAttacked(int posX, int posY, std::string player)
+bool Board::isSquareAttacked(int posX, int posY, const std::string& player)
 {
 	
 	for (auto dir : xyDir) {
@@ -177,5 +194,117 @@ bool Board::isSquareAttacked(int posX, int posY, std::string player)
 
 Piece* Board::getPieceAt(int x, int y)
 {
-	return board[y][x];;
+	return board[x][y];
+}
+
+void Board::movePiece(Piece* piece, int toX, int toY) 
+{
+	bool shortCastle = false, longCastle = false;
+	Piece* enemyPiece = getPieceAt(toX, toY);
+	if (enemyPiece != nullptr) {
+		delete enemyPiece;
+		enemyPiece = nullptr;
+	}
+	std::pair<int, int> pos = piece->getPosition();
+	if (piece->getPieceType() == "KING") {
+		if (pos.first - toX == 2) {
+			Piece* rook = getPieceAt(pos.first - 4, pos.second);
+			if (rook != nullptr) {
+				board[pos.first - 1][pos.second] = rook;
+				board[pos.first - 4][pos.second] = nullptr;
+				rook->setPosition(pos.first - 1, pos.second);
+				longCastle = true;
+			}
+		}
+		if (pos.first - toX == -2) {
+			Piece* rook = getPieceAt(pos.first + 3, pos.second);
+			if (rook != nullptr) {
+				board[pos.first + 3][pos.second] = nullptr;
+				board[pos.first + 1][pos.second] = rook;
+				rook->setPosition(pos.first + 1, pos.second);
+				shortCastle = true;
+			}
+		}
+		if (piece->getPieceColour() == "WHITE") {
+			whiteKingPos = { toX, toY };
+		}
+		else blackKingPos = { toX, toY };
+	}
+	if (piece->getPieceType() == "PAWN") { 
+		piece->setFirstMove(false); 
+		if (pos.first + 1 == toX) {
+			delete board[pos.first + 1][pos.second];
+			board[pos.first + 1][pos.second] = nullptr;
+		}
+		else if (pos.first - 1 == toX) {
+			delete board[pos.first - 1][pos.second];
+			board[pos.first - 1][pos.second] = nullptr;
+		}
+	}
+	if (piece->getPieceType() == "ROOK") piece->setFirstMove(false);
+	if (piece->getPieceType() == "KING") piece->setFirstMove(false);
+	board[pos.first][pos.second] = nullptr;
+	board[toX][toY] = piece;
+	piece->setPosition(toX, toY);
+	std::string move;
+	move.push_back(piece->getSymbol());
+	move.push_back(static_cast<char>(toX + 97));
+	move.push_back(static_cast<char>(toY + '1'));
+	if (piece->getPieceColour() == "WHITE") {
+		if (shortCastle) {
+			whiteMoveHistory.push_back("O-O");
+		}
+		else if (longCastle) {
+			whiteMoveHistory.push_back("O-O-O");
+		}
+		else whiteMoveHistory.push_back(move);
+	}
+	else {
+		if (shortCastle) {
+			blackMoveHistory.push_back("O-O");
+		}
+		else if (longCastle) {
+			blackMoveHistory.push_back("O-O-O");
+		}
+		else blackMoveHistory.push_back(move);
+	}
+}
+
+bool Board::simulateMove(Piece* piece, int toX, int toY, std::string player)
+{
+	Board testBoard = *this;
+	std::pair<int, int> pos = piece->getPosition();
+	Piece* testPiece = testBoard.getPieceAt(pos.first, pos.second);
+
+	testBoard.movePiece(testPiece, toX, toY);
+	if (player == "WHITE") {
+		return testBoard.isSquareAttacked(testBoard.whiteKingPos.first, testBoard.whiteKingPos.second, "WHITE");
+	}
+	else return testBoard.isSquareAttacked(testBoard.blackKingPos.first, testBoard.blackKingPos.second, "BLACK");
+}
+void Board::setPieceAt(int x, int y, Piece* piece)
+{
+	board[y][x] = piece;
+}
+
+std::string Board::lastMove(std::string colour)
+{
+	if (colour == "WHITE") return whiteMoveHistory[whiteMoveHistory.size() - 1];
+	else return blackMoveHistory[blackMoveHistory.size() - 1];
+}
+
+
+
+Board::Board(const Board& copyRef) : board(8, std::vector<Piece*>(8, nullptr))
+{
+	whiteKingPos = copyRef.whiteKingPos;
+	blackKingPos = copyRef.blackKingPos;
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (copyRef.board[i][j]) {
+				board[i][j] = copyRef.board[i][j]->copy();
+			}
+			else board[i][j] = nullptr;
+		}
+	}
 }
