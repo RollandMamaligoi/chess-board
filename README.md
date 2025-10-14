@@ -87,3 +87,6 @@ Pawn Promotion / Black perspective :
 https://github.com/user-attachments/assets/bf0c1497-1bd2-4a5e-beb3-fb85d6265b4f
 
 
+
+If you want to set up special board scenarios with this code you can edit the "specialSet()" function in Board.cpp. The first int for the pieces is the X axis (rank) and the second is the Y axis (row). To set up the game with your specialSet() settings, change the Game() constructor in Game.cpp from board.set() to board.specialSet().
+If you don't want to switch to black's perspective on their turn, edit the "moveSelection" function in Game.cpp.
