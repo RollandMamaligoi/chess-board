@@ -6,7 +6,7 @@
 //    return ;
 //}
 
-std::vector<std::pair<int, int>> Bishop::getPossibleMoves(Board& board, int posX, int posY)
+std::vector<std::pair<int, int>> Bishop::getPossibleMoves(const Board& board, int posX, int posY)
 {
     std::vector<std::pair<int, int>> moves;
     std::vector<std::pair<int, int>> directions = { {1, 1}, {1, -1}, {-1, -1}, {-1, 1} }; //declare all directions possible for Bishop
@@ -27,7 +27,7 @@ std::vector<std::pair<int, int>> Bishop::getPossibleMoves(Board& board, int posX
     }
     int i = 0;
     while (i < moves.size()) {
-        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, getPieceColour())) {
             moves.erase(moves.begin() + i);
         }
         else i++;
@@ -35,7 +35,7 @@ std::vector<std::pair<int, int>> Bishop::getPossibleMoves(Board& board, int posX
     return moves;
 }
 
-std::string Bishop::getPieceType()
+PieceType Bishop::getPieceType()
 {
     return pieceType;
 }
@@ -48,4 +48,7 @@ char Bishop::getSymbol()
 bool Bishop::isFirstMove()
 {
     return false;
+}
+Piece* Bishop::copy() {
+    return new Bishop(*this);
 }

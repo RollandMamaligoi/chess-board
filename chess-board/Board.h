@@ -1,6 +1,7 @@
 #pragma once
 class Piece;
 class Player;
+enum class Colour;
 #include <vector>
 #include <string>
 
@@ -13,17 +14,21 @@ protected:
 	bool whiteToMove = true;
 public:
 	Board();
+	Board(const Board& copyRef); //copy constructor
 	~Board();
 
-	std::pair<int, int> getKingPos(std::string colour);
+	Board operator=(const Board& other); //copy assignment operator
+	std::pair<int, int> getKingPos(Colour colour);
 	void setBoard();
 	void specialSet(); //for debugging only
 	void showBoard();
-	bool isSquareAttacked(int posX, int posY, const std::string& player);
-	Piece* getPieceAt(int x, int y);
+	void showBoardBlack();
+	bool isSquareAttacked(int posX, int posY, Colour player) const;
+	Piece* getPieceAt(int x, int y) const;
 	void movePiece(Piece* piece, int toX, int toY);
-	bool simulateMove(Piece* piece, int toX, int toY, std::string player);
+	bool simulateMove(Piece* piece, int toX, int toY, Colour player) const;
 	void setPieceAt(int x, int y, Piece* piece);
-	std::string lastMove(std::string colour);
-	Board(const Board& copyRef); //copy constructor
+	std::string lastMove(Colour colour) const;
+	Piece* pawnPromotion(Colour pawnColour, int toX, int toY);
+
 };

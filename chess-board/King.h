@@ -6,15 +6,15 @@ class Player;
 
 class King : public Piece {
 private:
-	std::string pieceType = "KING";
+	PieceType pieceType;
 	char symbol = 'K';
 	bool firstMove = true;
 public:
-	King(int posX, int posY, std::string pieceColour) :Piece(posX, posY, pieceColour) {};
-	std::vector<std::pair<int, int>> getPossibleMoves(Board& board, int posX, int posY);
-	std::string getPieceType();
+	King(int posX, int posY, Colour pieceColour) :Piece(posX, posY, pieceColour),pieceType(PieceType::KING) {};
+	std::vector<std::pair<int, int>> getPossibleMoves(const Board& board, int posX, int posY);
+	PieceType getPieceType();
 	char getSymbol();
 	bool isFirstMove();
-	void setFirstMove(bool moved) { firstMove = moved; };
-	Piece* copy() { return new King(*this); }
+	void setFirstMove(bool moved);
+	Piece* copy();
 };

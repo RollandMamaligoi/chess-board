@@ -1,13 +1,13 @@
 #include "Piece.h"
 #include "Board.h"
 #include "Player.h"
-Piece::Piece(int posX, int posY, std::string pieceColour) {
+Piece::Piece(int posX, int posY, Colour pieceColour) {
     this->posX = posX;
     this->posY = posY;
     this->pieceColour = pieceColour;
 }
 
-std::string Piece::getPieceColour()
+Colour Piece::getPieceColour() const
 {
     return pieceColour;
 }

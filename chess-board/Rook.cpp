@@ -7,7 +7,7 @@
 //    return ;
 //}
 
-std::vector<std::pair<int, int>> Rook::getPossibleMoves(Board& board, int posX, int posY)
+std::vector<std::pair<int, int>> Rook::getPossibleMoves(const Board& board, int posX, int posY)
 {
     std::vector<std::pair<int, int>> moves;
     std::vector<std::pair<int, int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
@@ -27,7 +27,7 @@ std::vector<std::pair<int, int>> Rook::getPossibleMoves(Board& board, int posX, 
     }
     int i = 0;
     while (i < moves.size()) {
-        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, getPieceColour())) {
             moves.erase(moves.begin() + i);
         }
         else i++;
@@ -35,7 +35,7 @@ std::vector<std::pair<int, int>> Rook::getPossibleMoves(Board& board, int posX, 
     return moves;
 }
 
-std::string Rook::getPieceType()
+PieceType Rook::getPieceType()
 {
     return pieceType;
 }
@@ -48,4 +48,13 @@ char Rook::getSymbol()
 bool Rook::isFirstMove()
 {
     return firstMove;
+}
+
+Piece* Rook::copy() {
+    return new Rook(*this);
+}
+
+void Rook::setFirstMove(bool moved)
+{
+    firstMove = moved;
 }

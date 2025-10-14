@@ -4,18 +4,23 @@
 
 class Piece;
 class Board;
+enum class Colour;
+
+
 
 class Player {
 protected:
 	std::vector<Piece*> Pieces;
-	std::string colour;
+	Colour colour;
 	bool check = false;
 public:
-	Player(Board& board, std::string colour);
-	std::string getColour();
+	Player(Board& board, Colour colour);
+	Player();
+	Colour getColour() const;
 	std::vector<Piece*> getPieces();
 	void printPieces();
 	void setCheckStatus();
 	bool isInCheck();
 	void deletePiece(Piece* piece);
+	void addPiece(Piece* piece);
 };

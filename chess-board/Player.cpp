@@ -3,7 +3,7 @@
 #include "Board.h"
 #include <iostream>
 
-Player::Player(Board& board, std::string colour)
+Player::Player(Board& board, Colour colour)
 {
 	this->colour = colour;
 	for (int i = 0; i < 8; i++) {
@@ -15,8 +15,15 @@ Player::Player(Board& board, std::string colour)
 	}
 }
 
+Player::Player()
+{
+	this->colour = Colour::WHITE;
+	Pieces = {};
+}
 
-std::string Player::getColour()
+
+
+Colour Player::getColour() const
 {
 	return colour;
 }
@@ -29,7 +36,7 @@ std::vector<Piece*> Player::getPieces()
 void Player::printPieces()
 {
 	for (int i = 0; i < Pieces.size(); i++) {
-		if (Pieces[i]->getPieceColour() == "BLACK") {
+		if (colourToString(Pieces[i]->getPieceColour()) == "BLACK") {
 			std::cout << (char)tolower(Pieces[i]->getSymbol()) << " ";
 		}
 		else {
@@ -58,6 +65,11 @@ void Player::deletePiece(Piece* piece)
 
 		else i++;
 	}
+}
+
+void Player::addPiece(Piece* piece)
+{
+	Pieces.push_back(piece);
 }
 
 

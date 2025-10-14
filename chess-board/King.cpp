@@ -3,7 +3,7 @@
 #include "Player.h"
 
 
-std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, int posY)
+std::vector<std::pair<int, int>> King::getPossibleMoves(const Board& board, int posX, int posY)
 {
     std::vector<std::pair<int, int>> moves;
     std::vector<std::pair<int, int>> kingDir = { {0, 1} , {1,1},{1,0},{1, -1},{0, -1},{-1, -1},{-1, 0}, {-1, 1} };
@@ -19,11 +19,11 @@ std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, 
             }
         }
     }
-    if (firstMove && !board.isSquareAttacked(posX, posY, pieceColour)) {
+    if (firstMove && !board.isSquareAttacked(posX, posY, getPieceColour())) {
         Piece* kingSideRook = board.getPieceAt(posX + 3, posY);
         if (kingSideRook != nullptr && kingSideRook->isFirstMove()) {
             if (board.getPieceAt(posX + 1, posY) == nullptr && board.getPieceAt(posX + 2, posY) == nullptr) {
-                if (!board.isSquareAttacked(posX + 1, posY, pieceColour) && !board.isSquareAttacked(posX + 2, posY, pieceColour)) {
+                if (!board.isSquareAttacked(posX + 1, posY, getPieceColour()) && !board.isSquareAttacked(posX + 2, posY, getPieceColour())) {
                     moves.push_back({ posX + 2, posY });
                 }
             }
@@ -31,7 +31,7 @@ std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, 
         Piece* queenSideRook = board.getPieceAt(posX - 4, posY);
         if (queenSideRook != nullptr && queenSideRook->isFirstMove()) {
             if (board.getPieceAt(posX - 1, posY) == nullptr && board.getPieceAt(posX - 2, posY) == nullptr && board.getPieceAt(posX - 3, posY) == nullptr) {
-                if (!board.isSquareAttacked(posX - 1, posY, pieceColour) && !board.isSquareAttacked(posX - 1, posY, pieceColour)) {
+                if (!board.isSquareAttacked(posX - 1, posY, getPieceColour()) && !board.isSquareAttacked(posX - 1, posY, getPieceColour())) {
                     moves.push_back({ posX - 2, posY });
                 }
             }
@@ -39,7 +39,7 @@ std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, 
     }
     int i = 0;
     while (i < moves.size()) {
-        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, getPieceColour())) {
             moves.erase(moves.begin() + i);
         }
         else i++;
@@ -47,7 +47,7 @@ std::vector<std::pair<int, int>> King::getPossibleMoves(Board& board, int posX, 
     return moves;
 }
 
-std::string King::getPieceType()
+PieceType King::getPieceType()
 {
     return pieceType;
 }
@@ -60,4 +60,13 @@ char King::getSymbol()
 bool King::isFirstMove()
 {
     return firstMove;
+}
+
+Piece* King::copy() {
+    return new King(*this);
+}
+
+void King::setFirstMove(bool moved)
+{
+    firstMove = moved;
 }

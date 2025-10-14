@@ -3,7 +3,7 @@
 #include "Player.h"
 
 
-std::vector<std::pair<int, int>> Knight::getPossibleMoves(Board& board, int posX, int posY)
+std::vector<std::pair<int, int>> Knight::getPossibleMoves(const Board& board, int posX, int posY)
 {
     std::vector<std::pair<int, int>> moves;
     std::vector<std::pair<int, int>> directions = { {1, 2}, {2 , 1} , {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2 } };
@@ -22,7 +22,7 @@ std::vector<std::pair<int, int>> Knight::getPossibleMoves(Board& board, int posX
     }
     int i = 0;
     while (i < moves.size()) {
-        if (board.simulateMove(this, moves[i].first, moves[i].second, pieceColour)) {
+        if (board.simulateMove(this, moves[i].first, moves[i].second, getPieceColour())) {
             moves.erase(moves.begin() + i);
         }
         else i++;
@@ -30,7 +30,7 @@ std::vector<std::pair<int, int>> Knight::getPossibleMoves(Board& board, int posX
     return moves;
 }
 
-std::string Knight::getPieceType()
+PieceType Knight::getPieceType()
 {
     return pieceType;
 }
@@ -43,4 +43,8 @@ char Knight::getSymbol()
 bool Knight::isFirstMove()
 {
     return false;
+}
+
+Piece* Knight::copy() {
+    return new Knight(*this);
 }
